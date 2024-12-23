@@ -118,8 +118,36 @@ function isIsoscelesTriangle(a, b, c) {
  *  10  => X
  *  26  => XXVI
  */
-function convertToRomanNumerals(/* num */) {
-  throw new Error('Not implemented');
+function convertToRomanNumerals(num) {
+  const roman = {
+    1: 'I',
+    2: 'II',
+    3: 'III',
+    4: 'IV',
+    5: 'V',
+    6: 'VI',
+    7: 'VII',
+    8: 'VIII',
+    9: 'IX',
+    10: 'X',
+  };
+  let result = '';
+  if (num > 9 && num % 10 !== 0) {
+    const dozens = Math.floor(num / 10);
+    const remainder = num % 10;
+    for (let i = 0; i < dozens; i += 1) {
+      result += roman[10];
+    }
+    return result + roman[remainder];
+  }
+  if (num > 9 && num % 10 === 0) {
+    const dozens = Math.floor(num / 10);
+    for (let i = 0; i < dozens; i += 1) {
+      result += roman[10];
+    }
+    return result;
+  }
+  return roman[num];
 }
 
 /**
@@ -137,8 +165,59 @@ function convertToRomanNumerals(/* num */) {
  *  '10,5'    => 'one zero point five'
  *  '1950.2'  => 'one nine five zero point two'
  */
-function convertNumberToString(/* numberStr */) {
-  throw new Error('Not implemented');
+function convertNumberToString(numberStr) {
+  let result = '';
+  for (let i = 0; i < numberStr.length; i += 1) {
+    let word = '';
+    switch (numberStr[i]) {
+      case '0':
+        word = 'zero';
+        break;
+      case '1':
+        word = 'one';
+        break;
+      case '2':
+        word = 'two';
+        break;
+      case '3':
+        word = 'three';
+        break;
+      case '4':
+        word = 'four';
+        break;
+      case '5':
+        word = 'five';
+        break;
+      case '6':
+        word = 'six';
+        break;
+      case '7':
+        word = 'seven';
+        break;
+      case '8':
+        word = 'eight';
+        break;
+      case '9':
+        word = 'nine';
+        break;
+      case '-':
+        word = 'minus';
+        break;
+      case ',':
+        word = 'point';
+        break;
+      case '.':
+        word = 'point';
+        break;
+      default:
+        word = '';
+    }
+    result += word;
+    if (i !== numberStr.length - 1) {
+      result += ' ';
+    }
+  }
+  return result;
 }
 
 /**
